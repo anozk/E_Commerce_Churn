@@ -3,6 +3,13 @@
 # Business Case: 
 The E-commerce churn project classifies potential churners, meaning customers who want to leave the E-commerce website. The aim of the project is to test several machiene learning models and to select the most suitable to classify as many churners as possible. This gives the E-commerce company the possibility to identify potential churners before they leave by offering discount coupons for instance. 
 
+# Business Recommendation
+Based on the SHAP analysis, two critical features emerged as key drivers for reducing churn: Cashback Amount and Warehouse-to-Home Delivery.
+The SHAP plot reveals that higher Cashback Amounts (indicated by the blue area on the right side of the zero line) are associated with a significantly lower probability of churn. Conversely, lower cashback amounts (red area) correspond to an increased likelihood of customers leaving.
+Additionally, the data suggests the company should prioritize improving its supply chain to reduce Warehouse-to-Home delivery times. This is evidenced by the red area in the plot, where more delivery days directly correlate with a higher probability of churn.
+
+<img width="777" height="334" alt="download (5)" src="https://github.com/user-attachments/assets/4c5cf5e0-8763-4154-b9fe-b461db39ce58" />
+
 # Methodology and approach: 
 
 Missing Values Imputation:Applying linear models, such as Logistic Regression, to data with improperly handled missingness can lead to biased odds ratio (OR) estimates, directly skewing final probability predictions. With several numeric features missing 3% to 8% of their values and a lack of specific domain metadata, both simple and iterative imputation strategies were evaluated. Comparative analysis demonstrated that Iterative Imputation superiorly preserved original data distributions and feature correlations, providing a more robust foundation for the classification model than simple univariate methods.
@@ -50,3 +57,5 @@ Confidence Intervals from bootstrap - resampling where recall is 0.72:
 Notably, the test precision of 0.69 falls outside the 95% confidence interval (Lower: 0.35, Median: 0.43, Upper: 0.51). This suggests that the bootstrap resampling is significantly more conservative than the test set, likely because the test set contains fewer "difficult" edge cases than the generated bootstrap samples. This outcome reinforces the importance of using bootstrap distributions over single point predictions to understand model performance limits.
 
 <img width="1233" height="701" alt="download (4)" src="https://github.com/user-attachments/assets/7dd2cfe2-5071-4216-88e6-28af79b0dda9" />
+
+
