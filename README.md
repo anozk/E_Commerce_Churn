@@ -3,9 +3,9 @@
 # Business Case: 
 The E-commerce churn project classifies potential churners, meaning customers who want to leave the E-commerce website. The aim of the project is to test several machiene learning models and to select the most suitable to classify as many churners as possible. This gives the E-commerce company the possibility to identify potential churners before they leave by offering discount coupons for instance. 
 
-# Methodology: 
+# Methodology and approach: 
 
-Missing Values Imputation: 
+Missing Values Imputation: Appyling the linear models such as Logistic Regression can lead to a over or under under-estimating the odds ratios (OR) of predictors, which directly biases the final probability predictions. Some numeric features have 3% to 8% missing values. Due to a lack of metadata regarding the dataset,, simple and iterative imputations have been applied. The comparison shows that iterative imputation has a more accurate fit regarding original data distributions. 
 
 Multicollinearity: In the project apart from three based models, also knn-Neighbourhood and Logistic Regression are tested. Both are linear models meaning that multilicollinearity can have an impact on the prediction and bias the prediction.  
 In the data there is a strong correlation among the independent variables. First, one of the categorical varialbes have been removed to avoid dummy trap (VIF = 1/1-R^2), then based on VIF value iteratively features have been selected and removed one by one. The same methodology has been applied to training, validation and test sets seperatly. 
@@ -21,11 +21,19 @@ Ablation study:Ablation was made based on Leave-One-Feature-Out (LOFO) Importanc
 Calibration: The model has been calibrated based on the validation data applying sigmoid method and prefit for cross validation. Compared to non raw model there is a 3.6% improvement. Calibration is important because well-calibrated model ensures that when it predicts a 70% chance of churn, those customers actually leave approximately 70% of the time. Without calibration a model might be "overconfident," predicting 99% churn for many people, even if the actual risk is lower.
 Calibration reduces the gap between the predicted scores and reality, boosting the trustworthiness of your results.
 
-Bootstrap - Resampling: In order to no to just to do a punctual prediction on the test set, bootstrap resampling has been applied. 1000 bootstrap samples have been generated based on precision - recall curve with 95% confidence intervalls. In addition, the bootstrap is applied with replacement which is then a stress test for the model. There will be a combination of data sets that contains more difficult data points as well as NaN values. When comparing the calibrated model to the raw model the 95% confidence intervalls have been slightly narrower. For the final prediction on the test set the model achieved with a threshold of .38, 0.69, 0.72, 0.70 for precision, recall and f1 score, respectively. We can say that 72 out of 100 churners will be identifed as churners and there will be 28 false negative. On the other hand, 69 of 100 customers will churn and there will be 31 false positive. Comparing the final metric with the 95% confidence intervalls: At Recall 0.72:
+Bootstrap - Resampling: To avoid relying solely on a single point prediction on the test set, bootstrap resampling was applied. I generated 1,000 bootstrap samples to calculate 95% confidence intervals based on the precision-recall curve. Because bootstrapping uses sampling with replacement, it serves as a "stress test" for the model, creating data combinations that include more challenging edge cases and missing values (NaNs).
+When comparing the calibrated model to the raw model, the 95% confidence intervals were slightly narrower, indicating improved stability. For the final test set prediction (using a 0.38 threshold), the model achieved a precision of 0.69, a recall of 0.72, and an F1-score of 0.70. This means 72 out of 100 actual churners were correctly identified (with 28 false negatives), while 69 out of 100 predicted churners actually left (with 31 false positives).
+
+Confidence Intervals from bootstrap - resampling where recall is 0.72:
+
 - Lower 95% CI Precision: 0.3541
 - Median Precision:       0.4290
 - Upper 95% CI Precision: 0.5076
-Achieving a precision of 0.69 is out side, on the upper part of the 95% confidence intervalls. The assumption is that the bootstrap - reasampling is much more conservative way of predicting the test set. 
+  
+Notably, the test precision of 0.69 falls outside the 95% confidence interval (Lower: 0.35, Median: 0.43, Upper: 0.51). This suggests that the bootstrap resampling is significantly more conservative than the test set, likely because the test set contains fewer "difficult" edge cases than the generated bootstrap samples. This outcome reinforces the importance of using bootstrap distributions over single point predictions to understand model performance limits.
+
+
+
 
 1. Essential Structure for 2026
 A professional data science README should include these core sections:
