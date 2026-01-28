@@ -1,4 +1,4 @@
-# E coomerce churn prediction
+# E commerce churn prediction
 
 # Business Case: 
 The E-commerce churn project classifies potential churners, meaning customers who want to leave the E-commerce website. The aim of the project is to test several machiene learning models and to select the most suitable to classify as many churners as possible. This gives the E-commerce company the possibility to identify potential churners before they leave by offering discount coupons for instance. 
